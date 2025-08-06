@@ -55,14 +55,14 @@
     /* Compact vertical spacing for tablets */
     @media (max-width: 1200px) {
       #left-side, #right-side {
-        padding: 10px;
+        padding: 12px;
       }
     }
 
     @media (max-width: 768px) {
       #left-side, #right-side {
         min-height: 50vh;
-        padding: 8px;
+        padding: 10px;
       }
     }
 
@@ -141,14 +141,14 @@
       100% { transform: translate(20px, 20px); }
     }
 
-    /* MUCH more compact scanning area for tablets */
+    /* Nicely sized scanning area for tablets */
     .scan-area {
-      width: min(160px, 35vw);
-      height: min(160px, 35vw);
-      max-width: 200px;
-      max-height: 200px;
+      width: min(200px, 38vw);
+      height: min(200px, 38vw);
+      max-width: 240px;
+      max-height: 240px;
       border: 3px solid #00e676;
-      border-radius: 20px;
+      border-radius: 22px;
       position: relative;
       background: radial-gradient(circle at center, 
         rgba(0, 230, 118, 0.15), 
@@ -159,8 +159,8 @@
       justify-content: center;
       transition: all 0.4s ease;
       box-shadow: 
-        0 0 30px rgba(0, 230, 118, 0.4),
-        inset 0 0 20px rgba(0, 230, 118, 0.1);
+        0 0 35px rgba(0, 230, 118, 0.4),
+        inset 0 0 25px rgba(0, 230, 118, 0.1);
       /* Enhanced touch prevention */
       -webkit-user-select: none !important;
       -webkit-touch-callout: none !important;
@@ -168,30 +168,30 @@
       touch-action: manipulation;
     }
 
-    /* Even smaller for tablets */
+    /* Good size for tablets */
     @media (max-width: 1200px) {
       .scan-area {
-        width: min(140px, 30vw);
-        height: min(140px, 30vw);
-        max-width: 160px;
-        max-height: 160px;
+        width: min(180px, 35vw);
+        height: min(180px, 35vw);
+        max-width: 200px;
+        max-height: 200px;
       }
     }
 
     @media (max-width: 768px) {
       .scan-area {
-        width: min(120px, 40vw);
-        height: min(120px, 40vw);
-        border-width: 2px;
-        border-radius: 15px;
+        width: min(160px, 42vw);
+        height: min(160px, 42vw);
+        border-width: 3px;
+        border-radius: 18px;
       }
     }
 
     .scan-area:hover {
       box-shadow: 
-        0 0 50px rgba(0, 230, 118, 0.6),
-        0 0 25px rgba(239, 68, 68, 0.3),
-        inset 0 0 30px rgba(0, 230, 118, 0.15);
+        0 0 55px rgba(0, 230, 118, 0.6),
+        0 0 28px rgba(239, 68, 68, 0.3),
+        inset 0 0 35px rgba(0, 230, 118, 0.15);
       background: radial-gradient(circle at center, 
         rgba(0, 230, 118, 0.2), 
         rgba(13, 71, 161, 0.15), 
@@ -203,16 +203,16 @@
       animation: royalPulse 0.6s infinite alternate;
       border-color: #ef4444;
       box-shadow: 
-        0 0 60px rgba(239, 68, 68, 0.8),
-        0 0 30px rgba(0, 230, 118, 0.4),
-        inset 0 0 40px rgba(239, 68, 68, 0.2);
+        0 0 65px rgba(239, 68, 68, 0.8),
+        0 0 35px rgba(0, 230, 118, 0.4),
+        inset 0 0 45px rgba(239, 68, 68, 0.2);
     }
 
     .scan-area.disabled {
       opacity: 0.6;
       cursor: not-allowed;
       border-color: #6b7280;
-      box-shadow: 0 0 15px rgba(107, 114, 128, 0.3);
+      box-shadow: 0 0 18px rgba(107, 114, 128, 0.3);
     }
 
     @keyframes royalPulse {
@@ -220,13 +220,13 @@
       100% { transform: scale(1.04); }
     }
 
-    /* Much smaller corner markers */
+    /* Better corner markers */
     .corner {
       position: absolute;
-      width: 18px;
-      height: 18px;
-      border: 2px solid #00e676;
-      border-radius: 2px;
+      width: 22px;
+      height: 22px;
+      border: 3px solid #00e676;
+      border-radius: 3px;
       transition: all 0.3s ease;
       /* Prevent selection on corners */
       -webkit-user-select: none !important;
@@ -235,69 +235,69 @@
 
     @media (max-width: 1200px) {
       .corner {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
         border-width: 2px;
       }
     }
 
     @media (max-width: 768px) {
       .corner {
-        width: 12px;
-        height: 12px;
-        border-width: 1px;
+        width: 18px;
+        height: 18px;
+        border-width: 2px;
       }
     }
 
     .corner.top-left {
-      top: -4px;
-      left: -4px;
+      top: -5px;
+      left: -5px;
       border-right: none;
       border-bottom: none;
     }
 
     .corner.top-right {
-      top: -4px;
-      right: -4px;
+      top: -5px;
+      right: -5px;
       border-left: none;
       border-bottom: none;
     }
 
     .corner.bottom-left {
-      bottom: -4px;
-      left: -4px;
+      bottom: -5px;
+      left: -5px;
       border-right: none;
       border-top: none;
     }
 
     .corner.bottom-right {
-      bottom: -4px;
-      right: -4px;
+      bottom: -5px;
+      right: -5px;
       border-left: none;
       border-top: none;
     }
 
     .scan-area.scanning .corner {
       border-color: #ef4444;
-      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
     }
 
-    /* Smaller laser effect */
+    /* Laser effect */
     .scan-line {
       position: absolute;
       width: 100%;
-      height: 2px;
+      height: 3px;
       background: linear-gradient(90deg, 
         transparent, 
         #ef4444, 
         #ffffff, 
         #ef4444, 
         transparent);
-      top: -6px;
+      top: -8px;
       opacity: 0;
       transition: all 0.3s ease;
       border-radius: 1px;
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
     }
 
     .scan-line.active {
@@ -312,15 +312,15 @@
       100% { top: 100%; opacity: 0; }
     }
 
-    /* Much more compact instructions */
+    /* Nicely sized instructions */
     .instruction {
-      margin-top: 15px;
-      font-size: clamp(11px, 1.8vw, 14px);
+      margin-top: 20px;
+      font-size: clamp(14px, 2.2vw, 17px);
       color: #00e676;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 1px;
-      text-shadow: 0 0 6px rgba(0, 230, 118, 0.5);
+      text-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
     }
 
     .instruction.disabled {
@@ -328,36 +328,36 @@
       text-shadow: none;
     }
 
-    /* Much smaller progress bar and closer to scanner */
+    /* Progress bar positioned properly below the instruction text */
     #progress-container {
       position: absolute;
-      bottom: 40px;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      width: min(240px, 70vw);
-      height: 6px;
+      transform: translate(-50%, 120px);
+      width: min(280px, 72vw);
+      height: 8px;
       background: rgba(0, 230, 118, 0.2);
-      border-radius: 3px;
+      border-radius: 4px;
       overflow: hidden;
-      border: 1px solid #00e676;
+      border: 2px solid #00e676;
       box-shadow: 
-        0 0 12px rgba(0, 230, 118, 0.3),
-        inset 0 1px 2px rgba(0, 0, 0, 0.2);
+        0 0 15px rgba(0, 230, 118, 0.3),
+        inset 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     @media (max-width: 1200px) {
       #progress-container {
-        bottom: 30px;
-        width: min(200px, 75vw);
-        height: 5px;
+        transform: translate(-50%, 110px);
+        width: min(240px, 75vw);
+        height: 7px;
       }
     }
 
     @media (max-width: 768px) {
       #progress-container {
-        bottom: 25px;
-        width: min(180px, 80vw);
-        height: 4px;
+        transform: translate(-50%, 100px);
+        width: min(220px, 80vw);
+        height: 6px;
       }
     }
 
@@ -366,8 +366,8 @@
       width: 0;
       background: linear-gradient(90deg, #00e676, #4caf50);
       transition: width 3s ease-out;
-      border-radius: 2px;
-      box-shadow: 0 0 8px rgba(0, 230, 118, 0.6);
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(0, 230, 118, 0.6);
       position: relative;
     }
 
@@ -390,24 +390,24 @@
       100% { transform: translateX(100%); }
     }
 
-    /* MUCH more compact left side content */
+    /* Nicely sized left side content */
     .system-header {
-      font-size: clamp(14px, 2.5vw, 18px);
+      font-size: clamp(18px, 3.2vw, 24px);
       font-weight: 900;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       color: #fff;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     }
 
     .status-display {
-      font-size: clamp(20px, 3.5vw, 28px);
+      font-size: clamp(28px, 4.5vw, 36px);
       font-weight: 700;
-      margin: 8px 0;
+      margin: 12px 0;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 0 0 15px currentColor;
+      letter-spacing: 3px;
+      text-shadow: 0 0 18px currentColor;
     }
 
     #welcome-message {
@@ -416,40 +416,40 @@
       color: #00e676;
     }
 
-    /* Much smaller fingerprint display */
+    /* Nicely sized fingerprint display */
     #fingerprint-display {
       display: none;
-      width: min(100px, 25vw);
-      height: min(160px, 35vw);
-      margin-top: 8px;
-      border-radius: 12px;
+      width: min(140px, 30vw);
+      height: min(200px, 42vw);
+      margin-top: 15px;
+      border-radius: 15px;
       box-shadow: 
-        0 0 25px rgba(0, 230, 118, 0.6),
-        0 0 12px rgba(239, 68, 68, 0.3),
-        inset 0 0 15px rgba(0, 230, 118, 0.1);
+        0 0 30px rgba(0, 230, 118, 0.6),
+        0 0 15px rgba(239, 68, 68, 0.3),
+        inset 0 0 20px rgba(0, 230, 118, 0.1);
       animation: royalFadeInScale 1.2s ease-out 0.6s both;
       border: 2px solid #00e676;
       background: radial-gradient(circle at center, 
         rgba(0, 0, 0, 0.4), 
         rgba(13, 71, 161, 0.2));
-      padding: 6px;
+      padding: 10px;
     }
 
     @media (max-width: 1200px) {
       #fingerprint-display {
-        width: min(80px, 30vw);
-        height: min(130px, 40vw);
-        margin-top: 6px;
-        padding: 4px;
+        width: min(120px, 32vw);
+        height: min(170px, 44vw);
+        margin-top: 12px;
+        padding: 8px;
       }
     }
 
     @media (max-width: 768px) {
       #fingerprint-display {
-        width: min(70px, 35vw);
-        height: min(110px, 45vw);
-        margin-top: 5px;
-        padding: 3px;
+        width: min(100px, 36vw);
+        height: min(140px, 48vw);
+        margin-top: 10px;
+        padding: 6px;
       }
     }
 
@@ -464,41 +464,41 @@
       }
     }
 
-    /* Much smaller security badges */
+    /* Nicely sized security badges */
     .security-badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 18px;
+      left: 18px;
       background: linear-gradient(135deg, 
         rgba(0, 230, 118, 0.15), 
         rgba(13, 71, 161, 0.1));
-      border: 1px solid #00e676;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: clamp(8px, 1.2vw, 10px);
+      border: 2px solid #00e676;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: clamp(10px, 1.5vw, 12px);
       font-weight: 700;
       color: #00e676;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
-      box-shadow: 0 2px 10px rgba(0, 230, 118, 0.3);
-      text-shadow: 0 0 4px rgba(0, 230, 118, 0.5);
+      letter-spacing: 0.5px;
+      box-shadow: 0 3px 12px rgba(0, 230, 118, 0.3);
+      text-shadow: 0 0 6px rgba(0, 230, 118, 0.5);
     }
 
-    /* Much smaller status indicators */
+    /* Nicely sized status indicators */
     .status-lights {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 18px;
+      right: 18px;
       display: flex;
-      gap: 6px;
+      gap: 8px;
     }
 
     .status-light {
-      width: clamp(8px, 1.2vw, 10px);
-      height: clamp(8px, 1.2vw, 10px);
+      width: clamp(11px, 1.5vw, 13px);
+      height: clamp(11px, 1.5vw, 13px);
       border-radius: 50%;
       background: #333;
-      border: 1px solid #555;
+      border: 2px solid #555;
       transition: all 0.4s ease;
       position: relative;
     }
@@ -507,18 +507,18 @@
       background: #00e676;
       border-color: #00e676;
       box-shadow: 
-        0 0 12px rgba(0, 230, 118, 0.8),
-        inset 0 0 6px rgba(0, 230, 118, 0.3);
+        0 0 15px rgba(0, 230, 118, 0.8),
+        inset 0 0 8px rgba(0, 230, 118, 0.3);
       animation: royalBlink 2s ease-in-out infinite;
     }
 
     .status-light.active::after {
       content: '';
       position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
       border-radius: 50%;
       border: 1px solid rgba(0, 230, 118, 0.4);
       animation: royalRipple 2s ease-in-out infinite;
@@ -531,15 +531,15 @@
 
     @keyframes royalRipple {
       0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(1.6); opacity: 0; }
+      100% { transform: scale(1.8); opacity: 0; }
     }
 
-    /* Much smaller fingerprint placeholder icon */
+    /* Nicely sized fingerprint placeholder icon */
     .fingerprint-icon {
-      font-size: clamp(22px, 3.5vw, 32px);
+      font-size: clamp(32px, 4.5vw, 42px);
       color: #00e676;
       opacity: 0.8;
-      text-shadow: 0 0 10px rgba(0, 230, 118, 0.6);
+      text-shadow: 0 0 12px rgba(0, 230, 118, 0.6);
       /* Extra prevention for the emoji */
       -webkit-user-select: none !important;
       -webkit-touch-callout: none !important;
@@ -547,79 +547,91 @@
       pointer-events: none;
     }
 
-    /* Much smaller UK Royal styling */
+    /* Nicely sized UK Royal styling */
     .royal-logo {
-      font-size: clamp(11px, 1.8vw, 14px);
-      margin-bottom: 4px;
+      font-size: clamp(14px, 2.2vw, 17px);
+      margin-bottom: 8px;
       color: #ef4444;
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
     }
 
     .royal-welcome {
-      font-size: clamp(9px, 1.5vw, 11px);
+      font-size: clamp(11px, 1.8vw, 14px);
       color: #ffffff;
-      margin-top: 6px;
+      margin-top: 10px;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
-      text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
     }
 
-    /* Much smaller reset instruction */
+    /* Reset instruction positioned below progress bar */
     .reset-instruction {
       position: absolute;
-      bottom: 70px;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      font-size: clamp(7px, 1vw, 9px);
+      transform: translate(-50%, 160px);
+      font-size: clamp(9px, 1.3vw, 11px);
       color: #6b7280;
       text-align: center;
       display: none;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
     }
 
     @media (max-width: 1200px) {
       .reset-instruction {
-        bottom: 55px;
+        transform: translate(-50%, 145px);
       }
     }
 
     @media (max-width: 768px) {
       .reset-instruction {
-        bottom: 45px;
+        transform: translate(-50%, 135px);
       }
     }
 
-    /* Much smaller sound control button */
+    /* Sound control button MOVED WAY UP to be visible */
     .sound-toggle {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
+      top: 60px;
+      right: 18px;
       background: linear-gradient(135deg, 
         rgba(0, 230, 118, 0.15), 
         rgba(13, 71, 161, 0.1));
-      border: 1px solid #00e676;
-      padding: 4px 8px;
-      border-radius: 6px;
+      border: 2px solid #00e676;
+      padding: 8px 12px;
+      border-radius: 8px;
       color: #00e676;
       cursor: pointer;
-      font-size: clamp(7px, 1vw, 9px);
+      font-size: clamp(9px, 1.3vw, 11px);
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 230, 118, 0.2);
+      box-shadow: 0 3px 10px rgba(0, 230, 118, 0.2);
+    }
+
+    @media (max-width: 1200px) {
+      .sound-toggle {
+        top: 55px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sound-toggle {
+        top: 50px;
+      }
     }
 
     .sound-toggle:hover {
       background: linear-gradient(135deg, 
         rgba(0, 230, 118, 0.25), 
         rgba(13, 71, 161, 0.2));
-      box-shadow: 0 3px 15px rgba(0, 230, 118, 0.4);
+      box-shadow: 0 4px 18px rgba(0, 230, 118, 0.4);
       transform: translateY(-1px);
     }
 
@@ -891,27 +903,29 @@
       }
     });
 
-    // Compact fingerprint pattern optimized for small display
-    const cleanFingerprint = `<svg width="100%" height="100%" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    // Well-proportioned fingerprint pattern
+    const cleanFingerprint = `<svg width="100%" height="100%" viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <defs>
         <style>
-          .fp{fill:none;stroke:#00e676;stroke-width:1.5;stroke-linecap:round;opacity:0.9;}
+          .fp{fill:none;stroke:#00e676;stroke-width:2;stroke-linecap:round;opacity:0.9;}
         </style>
       </defs>
-      <g transform="translate(60,90)">
-        <!-- Compact fingerprint pattern -->
-        <ellipse class="fp" cx="0" cy="0" rx="50" ry="80"/>
-        <ellipse class="fp" cx="0" cy="0" rx="45" ry="72"/>
-        <ellipse class="fp" cx="0" cy="0" rx="40" ry="64"/>
-        <ellipse class="fp" cx="0" cy="0" rx="35" ry="56"/>
-        <ellipse class="fp" cx="0" cy="0" rx="30" ry="48"/>
-        <ellipse class="fp" cx="0" cy="0" rx="25" ry="40"/>
-        <ellipse class="fp" cx="0" cy="0" rx="20" ry="32"/>
-        <ellipse class="fp" cx="0" cy="0" rx="15" ry="24"/>
-        <ellipse class="fp" cx="0" cy="0" rx="12" ry="18"/>
-        <ellipse class="fp" cx="0" cy="0" rx="8" ry="12"/>
-        <ellipse class="fp" cx="0" cy="0" rx="5" ry="8"/>
-        <ellipse class="fp" cx="0" cy="0" rx="3" ry="5"/>
+      <g transform="translate(80,110)">
+        <!-- Well-proportioned fingerprint pattern -->
+        <ellipse class="fp" cx="0" cy="0" rx="60" ry="100"/>
+        <ellipse class="fp" cx="0" cy="0" rx="55" ry="92"/>
+        <ellipse class="fp" cx="0" cy="0" rx="50" ry="84"/>
+        <ellipse class="fp" cx="0" cy="0" rx="45" ry="76"/>
+        <ellipse class="fp" cx="0" cy="0" rx="40" ry="68"/>
+        <ellipse class="fp" cx="0" cy="0" rx="35" ry="60"/>
+        <ellipse class="fp" cx="0" cy="0" rx="30" ry="52"/>
+        <ellipse class="fp" cx="0" cy="0" rx="25" ry="44"/>
+        <ellipse class="fp" cx="0" cy="0" rx="20" ry="36"/>
+        <ellipse class="fp" cx="0" cy="0" rx="15" ry="28"/>
+        <ellipse class="fp" cx="0" cy="0" rx="12" ry="22"/>
+        <ellipse class="fp" cx="0" cy="0" rx="8" ry="16"/>
+        <ellipse class="fp" cx="0" cy="0" rx="5" ry="12"/>
+        <ellipse class="fp" cx="0" cy="0" rx="3" ry="8"/>
       </g>
     </svg>`;
 
@@ -986,7 +1000,7 @@
         scanningDrone = null;
       }
       
-      // Use the compact fingerprint
+      // Use the well-proportioned fingerprint
       fingerprintDisplay.innerHTML = cleanFingerprint;
       
       // Clear, pleasant success sound
