@@ -11,6 +11,15 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      /* Prevent text selection on all elements */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Prevent touch callouts */
+      -webkit-touch-callout: none;
+      /* Prevent tap highlight */
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -19,6 +28,9 @@
       height: 100vh;
       overflow: hidden;
       background: linear-gradient(135deg, #0c1445, #1a237e);
+      /* Additional mobile optimizations */
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
 
     #left-side, #right-side {
@@ -68,6 +80,11 @@
       justify-content: center;
       transition: all 0.3s ease;
       box-shadow: 0 0 30px rgba(0, 230, 118, 0.3);
+      /* Enhanced touch prevention */
+      -webkit-user-select: none !important;
+      -webkit-touch-callout: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      touch-action: manipulation;
     }
 
     .scan-area:hover {
@@ -99,6 +116,9 @@
       width: 20px;
       height: 20px;
       border: 3px solid #00e676;
+      /* Prevent selection on corners */
+      -webkit-user-select: none !important;
+      -webkit-touch-callout: none !important;
     }
 
     .corner.top-left {
@@ -164,10 +184,10 @@
       color: #6b7280;
     }
 
-    /* Progress bar */
+    /* Progress bar - moved higher for tablet compatibility */
     #progress-container {
       position: absolute;
-      bottom: 50px;
+      bottom: 120px; /* Changed from 50px to 120px */
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
@@ -298,6 +318,11 @@
       font-size: 48px;
       color: #00e676;
       opacity: 0.7;
+      /* Extra prevention for the emoji */
+      -webkit-user-select: none !important;
+      -webkit-touch-callout: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      pointer-events: none; /* Make it non-interactive */
     }
 
     /* UK Government styling */
@@ -319,10 +344,10 @@
       letter-spacing: 1px;
     }
 
-    /* Reset instruction */
+    /* Reset instruction - also moved higher to avoid cutoff */
     .reset-instruction {
       position: absolute;
-      bottom: 100px;
+      bottom: 170px; /* Changed from 100px to 170px */
       left: 50%;
       transform: translateX(-50%);
       font-size: 12px;
@@ -519,8 +544,34 @@
       });
     }
 
-    // Event listeners for both mouse and touch
-    scanArea.addEventListener('mousedown', (e) => {
+    // Prevent all context menus and text selection globally
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Enhanced event listeners with better touch handling
+    scanArea.addEventListener('touchstart', function(e) {
+      e.preventDefault(); // Prevent default touch behavior
+      if (isWelcomeShown) {
+        resetSystem();
+      } else {
+        startScanning();
+      }
+    }, { passive: false });
+
+    scanArea.addEventListener('mousedown', function(e) {
+      e.preventDefault(); // Prevent text selection
       if (isWelcomeShown) {
         resetSystem();
       } else {
@@ -528,22 +579,48 @@
       }
     });
 
-    scanArea.addEventListener('touchstart', (e) => {
-      if (isWelcomeShown) {
-        resetSystem();
-      } else {
-        startScanning();
-      }
+    scanArea.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      cancelScanning();
+    }, { passive: false });
+
+    scanArea.addEventListener('mouseup', function(e) {
+      e.preventDefault();
+      cancelScanning();
     });
-    
-    scanArea.addEventListener('mouseup', cancelScanning);
-    scanArea.addEventListener('touchend', cancelScanning);
-    
+
+    scanArea.addEventListener('touchcancel', function(e) {
+      e.preventDefault();
+      cancelScanning();
+    }, { passive: false });
+
     scanArea.addEventListener('mouseleave', cancelScanning);
-    scanArea.addEventListener('touchcancel', cancelScanning);
 
-    // Prevent context menu on touch devices
-    scanArea.addEventListener('contextmenu', e => e.preventDefault());
+    // Prevent context menu specifically on scan area
+    scanArea.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    });
+
+    // Additional prevention for long press
+    let longPressTimer;
+    scanArea.addEventListener('touchstart', function(e) {
+      longPressTimer = setTimeout(function() {
+        // Clear any selection that might have occurred
+        if (window.getSelection) {
+          window.getSelection().removeAllRanges();
+        }
+      }, 100);
+    });
+
+    scanArea.addEventListener('touchend', function(e) {
+      clearTimeout(longPressTimer);
+    });
+
+    scanArea.addEventListener('touchcancel', function(e) {
+      clearTimeout(longPressTimer);
+    });
   </script>
 </body>
 </html>
