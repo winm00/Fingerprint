@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UK Border Control - Biometric Entry System</title>
+  <title>UK Border Force - Biometric Entry System</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
     
@@ -25,12 +25,26 @@
     body {
       font-family: 'Orbitron', monospace;
       display: flex;
-      height: 100vh;
+      flex-direction: row;
+      min-height: 100vh;
       overflow: hidden;
-      background: linear-gradient(135deg, #0c1445, #1a237e);
+      background: linear-gradient(135deg, #0c1445, #1a237e, #0d47a1);
       /* Additional mobile optimizations */
       -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+    }
+
+    /* Responsive layout adjustments */
+    @media (max-width: 1024px) {
+      body {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
     }
 
     #left-side, #right-side {
@@ -40,46 +54,120 @@
       justify-content: center;
       flex-direction: column;
       position: relative;
+      min-height: 50vh;
+      padding: 20px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 1024px) {
+      #left-side, #right-side {
+        min-height: 40vh;
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #left-side, #right-side {
+        min-height: 35vh;
+        padding: 10px;
+      }
     }
 
     #left-side {
-      background: linear-gradient(135deg, #0d47a1, #1565c0);
+      background: linear-gradient(135deg, #0d47a1, #1565c0, #1976d2);
       color: #00e676;
       text-align: center;
-      border-right: 3px solid #ef4444;
+      border-right: 4px solid #ef4444;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1024px) {
+      #left-side {
+        border-right: none;
+        border-bottom: 4px solid #ef4444;
+      }
     }
 
     #right-side {
-      background: linear-gradient(135deg, #263238, #37474f);
+      background: linear-gradient(135deg, #263238, #37474f, #455a64);
       color: #00e676;
       position: relative;
       cursor: pointer;
+      overflow: hidden;
     }
 
-    /* UK Flag accent */
-    .uk-accent {
+    /* Animated UK Flag accent */
+    .uk-flag-accent {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, #0d47a1 33%, #ffffff 33%, #ffffff 66%, #ef4444 66%);
+      height: 8px;
+      background: linear-gradient(90deg, 
+        #0d47a1 0%, #0d47a1 33%, 
+        #ffffff 33%, #ffffff 37%,
+        #ef4444 37%, #ef4444 40%,
+        #ffffff 40%, #ffffff 43%,
+        #ef4444 43%, #ef4444 46%,
+        #ffffff 46%, #ffffff 50%,
+        #ef4444 50%, #ef4444 54%,
+        #ffffff 54%, #ffffff 57%,
+        #ef4444 57%, #ef4444 60%,
+        #ffffff 60%, #ffffff 63%,
+        #ef4444 63%, #ef4444 66%,
+        #ffffff 66%, #ffffff 70%,
+        #0d47a1 70%, #0d47a1 100%);
       z-index: 10;
+      animation: flagShimmer 4s ease-in-out infinite;
     }
 
-    /* Scanning Area */
+    @keyframes flagShimmer {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Royal British grid background */
+    .british-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(0, 230, 118, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 230, 118, 0.08) 1px, transparent 1px),
+        linear-gradient(45deg, rgba(239, 68, 68, 0.03) 1px, transparent 1px);
+      background-size: 25px 25px, 25px 25px, 50px 50px;
+      opacity: 0.4;
+      animation: britishGridMove 30s linear infinite;
+    }
+
+    @keyframes britishGridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(25px, 25px); }
+    }
+
+    /* Enhanced Scanning Area - Responsive */
     .scan-area {
-      width: 200px;
-      height: 200px;
-      border: 3px solid #00e676;
-      border-radius: 20px;
+      width: min(220px, 40vw);
+      height: min(220px, 40vw);
+      max-width: 280px;
+      max-height: 280px;
+      border: 4px solid #00e676;
+      border-radius: 25px;
       position: relative;
-      background: rgba(0, 230, 118, 0.1);
+      background: radial-gradient(circle at center, 
+        rgba(0, 230, 118, 0.15), 
+        rgba(13, 71, 161, 0.1), 
+        rgba(0, 230, 118, 0.05));
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 30px rgba(0, 230, 118, 0.3);
+      transition: all 0.4s ease;
+      box-shadow: 
+        0 0 40px rgba(0, 230, 118, 0.4),
+        inset 0 0 30px rgba(0, 230, 118, 0.1);
       /* Enhanced touch prevention */
       -webkit-user-select: none !important;
       -webkit-touch-callout: none !important;
@@ -87,303 +175,452 @@
       touch-action: manipulation;
     }
 
+    @media (max-width: 768px) {
+      .scan-area {
+        width: min(180px, 45vw);
+        height: min(180px, 45vw);
+        border-width: 3px;
+        border-radius: 20px;
+      }
+    }
+
     .scan-area:hover {
-      box-shadow: 0 0 50px rgba(0, 230, 118, 0.5);
-      background: rgba(0, 230, 118, 0.2);
+      box-shadow: 
+        0 0 60px rgba(0, 230, 118, 0.6),
+        0 0 30px rgba(239, 68, 68, 0.3),
+        inset 0 0 40px rgba(0, 230, 118, 0.15);
+      background: radial-gradient(circle at center, 
+        rgba(0, 230, 118, 0.2), 
+        rgba(13, 71, 161, 0.15), 
+        rgba(239, 68, 68, 0.05));
+      transform: translateY(-2px);
     }
 
     .scan-area.scanning {
-      animation: pulse 0.5s infinite alternate;
-      border-color: #ff5722;
-      box-shadow: 0 0 50px rgba(255, 87, 34, 0.5);
+      animation: royalPulse 0.6s infinite alternate;
+      border-color: #ef4444;
+      box-shadow: 
+        0 0 80px rgba(239, 68, 68, 0.8),
+        0 0 40px rgba(0, 230, 118, 0.4),
+        inset 0 0 50px rgba(239, 68, 68, 0.2);
     }
 
     .scan-area.disabled {
       opacity: 0.6;
       cursor: not-allowed;
       border-color: #6b7280;
-      box-shadow: 0 0 15px rgba(107, 114, 128, 0.3);
+      box-shadow: 0 0 20px rgba(107, 114, 128, 0.3);
     }
 
-    @keyframes pulse {
+    @keyframes royalPulse {
       0% { transform: scale(1); }
-      100% { transform: scale(1.05); }
+      100% { transform: scale(1.06); }
     }
 
-    /* Corner markers for scan area */
+    /* Royal corner markers - Responsive */
     .corner {
       position: absolute;
-      width: 20px;
-      height: 20px;
-      border: 3px solid #00e676;
+      width: 25px;
+      height: 25px;
+      border: 4px solid #00e676;
+      border-radius: 3px;
+      transition: all 0.3s ease;
       /* Prevent selection on corners */
       -webkit-user-select: none !important;
       -webkit-touch-callout: none !important;
     }
 
+    @media (max-width: 768px) {
+      .corner {
+        width: 20px;
+        height: 20px;
+        border-width: 3px;
+      }
+    }
+
     .corner.top-left {
-      top: -3px;
-      left: -3px;
+      top: -6px;
+      left: -6px;
       border-right: none;
       border-bottom: none;
     }
 
     .corner.top-right {
-      top: -3px;
-      right: -3px;
+      top: -6px;
+      right: -6px;
       border-left: none;
       border-bottom: none;
     }
 
     .corner.bottom-left {
-      bottom: -3px;
-      left: -3px;
+      bottom: -6px;
+      left: -6px;
       border-right: none;
       border-top: none;
     }
 
     .corner.bottom-right {
-      bottom: -3px;
-      right: -3px;
+      bottom: -6px;
+      right: -6px;
       border-left: none;
       border-top: none;
     }
 
-    /* Scanning laser effect */
+    .scan-area.scanning .corner {
+      border-color: #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+    }
+
+    /* Royal scanning laser effect */
     .scan-line {
       position: absolute;
       width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ff5722, transparent);
+      height: 3px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        #ef4444, 
+        #ffffff, 
+        #ef4444, 
+        transparent);
       top: -10px;
       opacity: 0;
       transition: all 0.3s ease;
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
     }
 
     .scan-line.active {
       opacity: 1;
-      animation: scanMove 2s linear infinite;
+      animation: royalScanMove 2.5s ease-in-out infinite;
     }
 
-    @keyframes scanMove {
-      0% { top: 0; }
-      100% { top: 100%; }
+    @keyframes royalScanMove {
+      0% { top: 0; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
     }
 
-    /* Instructions */
+    /* Instructions - Responsive */
     .instruction {
-      margin-top: 30px;
-      font-size: 18px;
+      margin-top: 25px;
+      font-size: clamp(14px, 2.5vw, 18px);
       color: #00e676;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
     }
 
     .instruction.disabled {
       color: #6b7280;
+      text-shadow: none;
     }
 
-    /* Progress bar - moved higher for tablet compatibility */
+    /* Enhanced progress bar - Responsive */
     #progress-container {
       position: absolute;
-      bottom: 120px; /* Changed from 50px to 120px */
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
-      width: 300px;
-      height: 8px;
+      width: min(320px, 80vw);
+      height: 10px;
       background: rgba(0, 230, 118, 0.2);
-      border-radius: 4px;
+      border-radius: 5px;
       overflow: hidden;
-      border: 1px solid #00e676;
+      border: 2px solid #00e676;
+      box-shadow: 
+        0 0 20px rgba(0, 230, 118, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      #progress-container {
+        bottom: 60px;
+        width: min(280px, 85vw);
+        height: 8px;
+      }
     }
 
     #progress-bar {
       height: 100%;
       width: 0;
       background: linear-gradient(90deg, #00e676, #4caf50);
-      transition: width 3s linear;
-      box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+      transition: width 3s ease-out;
+      border-radius: 3px;
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.6);
+      position: relative;
     }
 
-    /* Left side content */
-    .system-header {
-      font-size: 24px;
-      font-weight: 900;
-      margin-bottom: 20px;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
-    .status-display {
-      font-size: 48px;
-      font-weight: 700;
-      margin: 20px 0;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      text-shadow: 0 0 20px currentColor;
-    }
-
-    #welcome-message {
-      display: none;
-      animation: fadeInScale 1s ease-out;
-      color: #00e676;
-    }
-
-    #fingerprint-display {
-      display: none;
-      width: 180px;
-      height: 280px;
-      margin-top: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0, 230, 118, 0.5);
-      animation: fadeInScale 1s ease-out 0.5s both;
-      border: 2px solid #00e676;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 10px;
-    }
-
-    @keyframes fadeInScale {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    /* Security badge */
-    .security-badge {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      background: rgba(0, 230, 118, 0.1);
-      border: 2px solid #00e676;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #00e676;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* Status indicators */
-    .status-lights {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .status-light {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #333;
-      border: 1px solid #555;
-    }
-
-    .status-light.active {
-      background: #00e676;
-      box-shadow: 0 0 10px #00e676;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0.3; }
-    }
-
-    /* Scanner grid background */
-    .scanner-bg {
+    #progress-bar::after {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: 
-        linear-gradient(rgba(0, 230, 118, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 230, 118, 0.1) 1px, transparent 1px);
-      background-size: 20px 20px;
-      opacity: 0.3;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+      animation: royalShimmer 2s ease-in-out infinite;
     }
 
-    /* Fingerprint placeholder icon */
-    .fingerprint-icon {
-      font-size: 48px;
+    @keyframes royalShimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Left side content - Responsive */
+    .system-header {
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .status-display {
+      font-size: clamp(32px, 6vw, 50px);
+      font-weight: 700;
+      margin: 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 30px currentColor;
+    }
+
+    #welcome-message {
+      display: none;
+      animation: royalFadeInScale 1.2s ease-out;
       color: #00e676;
-      opacity: 0.7;
+    }
+
+    #fingerprint-display {
+      display: none;
+      width: min(190px, 35vw);
+      height: min(290px, 50vw);
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 
+        0 0 40px rgba(0, 230, 118, 0.6),
+        0 0 20px rgba(239, 68, 68, 0.3),
+        inset 0 0 30px rgba(0, 230, 118, 0.1);
+      animation: royalFadeInScale 1.2s ease-out 0.6s both;
+      border: 3px solid #00e676;
+      background: radial-gradient(circle at center, 
+        rgba(0, 0, 0, 0.4), 
+        rgba(13, 71, 161, 0.2));
+      padding: 12px;
+    }
+
+    @media (max-width: 768px) {
+      #fingerprint-display {
+        width: min(140px, 40vw);
+        height: min(220px, 60vw);
+        margin-top: 15px;
+        padding: 8px;
+      }
+    }
+
+    @keyframes royalFadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) rotateY(20deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+      }
+    }
+
+    /* Royal security badges - Responsive */
+    .security-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, 
+        rgba(0, 230, 118, 0.15), 
+        rgba(13, 71, 161, 0.1));
+      border: 2px solid #00e676;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: clamp(11px, 2vw, 14px);
+      font-weight: 700;
+      color: #00e676;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px rgba(0, 230, 118, 0.3);
+      text-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
+    }
+
+    /* Royal status indicators - Responsive */
+    .status-lights {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .status-light {
+      width: clamp(12px, 2vw, 14px);
+      height: clamp(12px, 2vw, 14px);
+      border-radius: 50%;
+      background: #333;
+      border: 2px solid #555;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .status-light.active {
+      background: #00e676;
+      border-color: #00e676;
+      box-shadow: 
+        0 0 20px rgba(0, 230, 118, 0.8),
+        inset 0 0 10px rgba(0, 230, 118, 0.3);
+      animation: royalBlink 2s ease-in-out infinite;
+    }
+
+    .status-light.active::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 230, 118, 0.4);
+      animation: royalRipple 2s ease-in-out infinite;
+    }
+
+    @keyframes royalBlink {
+      0%, 70% { opacity: 1; }
+      85%, 100% { opacity: 0.4; }
+    }
+
+    @keyframes royalRipple {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    /* Fingerprint placeholder icon - Responsive */
+    .fingerprint-icon {
+      font-size: clamp(36px, 6vw, 52px);
+      color: #00e676;
+      opacity: 0.8;
+      text-shadow: 0 0 15px rgba(0, 230, 118, 0.6);
       /* Extra prevention for the emoji */
       -webkit-user-select: none !important;
       -webkit-touch-callout: none !important;
       -webkit-tap-highlight-color: transparent !important;
-      pointer-events: none; /* Make it non-interactive */
+      pointer-events: none;
     }
 
-    /* UK Government styling */
-    .gov-logo {
-      font-size: 20px;
+    /* UK Royal styling - Responsive */
+    .royal-logo {
+      font-size: clamp(16px, 3vw, 22px);
       margin-bottom: 10px;
       color: #ef4444;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
     }
 
-    .country-welcome {
-      font-size: 16px;
+    .royal-welcome {
+      font-size: clamp(14px, 2.5vw, 17px);
       color: #ffffff;
       margin-top: 15px;
-      font-weight: 400;
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
-    /* Reset instruction - also moved higher to avoid cutoff */
+    /* Reset instruction - Responsive */
     .reset-instruction {
       position: absolute;
-      bottom: 170px; /* Changed from 100px to 170px */
+      bottom: 130px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 12px;
+      font-size: clamp(10px, 1.5vw, 12px);
       color: #6b7280;
       text-align: center;
       display: none;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
+
+    @media (max-width: 768px) {
+      .reset-instruction {
+        bottom: 110px;
+      }
+    }
+
+    /* Enhanced sound control button - Responsive */
+    .sound-toggle {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, 
+        rgba(0, 230, 118, 0.15), 
+        rgba(13, 71, 161, 0.1));
+      border: 2px solid #00e676;
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: #00e676;
+      cursor: pointer;
+      font-size: clamp(10px, 1.5vw, 12px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 230, 118, 0.2);
+    }
+
+    .sound-toggle:hover {
+      background: linear-gradient(135deg, 
+        rgba(0, 230, 118, 0.25), 
+        rgba(13, 71, 161, 0.2));
+      box-shadow: 0 6px 25px rgba(0, 230, 118, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .sound-toggle.muted {
+      opacity: 0.5;
+      border-color: #6b7280;
+      color: #6b7280;
+    }
   </style>
 </head>
 <body>
   <!-- Left Side: System Display -->
   <div id="left-side">
-    <div class="uk-accent"></div>
-    <div class="scanner-bg"></div>
-    <div class="security-badge">UK Border Force</div>
+    <div class="uk-flag-accent"></div>
+    <div class="british-bg"></div>
+    <div class="security-badge">🛡️ UK Border Force</div>
     <div class="status-lights">
       <div class="status-light" id="light1"></div>
       <div class="status-light" id="light2"></div>
       <div class="status-light" id="light3"></div>
     </div>
     
-    <div class="gov-logo">🇬🇧 UNITED KINGDOM</div>
+    <div class="royal-logo">🇬🇧 UNITED KINGDOM</div>
     <div class="system-header">BORDER CONTROL</div>
     <div class="status-display" id="status-text">READY</div>
-    <div class="status-display" id="welcome-message">IDENTITY VERIFIED</div>
-    <div class="country-welcome" id="country-welcome" style="display: none;">Welcome to the United Kingdom</div>
+    <div class="status-display" id="welcome-message">ACCESS<br>GRANTED</div>
+    <div class="royal-welcome" id="royal-welcome" style="display: none;">Welcome to the United Kingdom</div>
     <div id="fingerprint-display"></div>
   </div>
 
   <!-- Right Side: Fingerprint Scanner -->
   <div id="right-side">
-    <div class="uk-accent"></div>
-    <div class="scanner-bg"></div>
-    <div class="security-badge">Scanner Terminal</div>
+    <div class="uk-flag-accent"></div>
+    <div class="british-bg"></div>
+    <div class="security-badge">🔬 Biometric Terminal</div>
+    <div class="sound-toggle" id="sound-toggle">🔊 SOUND</div>
     
     <div class="scan-area" id="scan-area">
       <div class="corner top-left"></div>
@@ -405,52 +642,271 @@
   <script>
     const scanArea = document.getElementById('scan-area');
     const welcomeMessage = document.getElementById('welcome-message');
-    const countryWelcome = document.getElementById('country-welcome');
+    const royalWelcome = document.getElementById('royal-welcome');
     const fingerprintDisplay = document.getElementById('fingerprint-display');
     const progressBar = document.getElementById('progress-bar');
     const scanLine = document.getElementById('scan-line');
     const statusText = document.getElementById('status-text');
     const instructionText = document.getElementById('instruction-text');
     const resetInstruction = document.getElementById('reset-instruction');
+    const soundToggle = document.getElementById('sound-toggle');
     const lights = [
       document.getElementById('light1'),
       document.getElementById('light2'),
       document.getElementById('light3')
     ];
 
-    // Clean oval fingerprint pattern - just concentric ovals
-    const standardFingerprint = `<svg width="160" height="260" viewBox="0 0 160 260" xmlns="http://www.w3.org/2000/svg">
-      <defs><style>.fp{fill:none;stroke:#00e676;stroke-width:2;stroke-linecap:round;opacity:0.85;}</style></defs>
-      <g transform="translate(80,130)">
-        <!-- Simple concentric oval patterns -->
-        <ellipse class="fp" cx="0" cy="0" rx="70" ry="115"/>
-        <ellipse class="fp" cx="0" cy="0" rx="65" ry="107"/>
-        <ellipse class="fp" cx="0" cy="0" rx="60" ry="99"/>
-        <ellipse class="fp" cx="0" cy="0" rx="55" ry="91"/>
-        <ellipse class="fp" cx="0" cy="0" rx="50" ry="83"/>
-        <ellipse class="fp" cx="0" cy="0" rx="45" ry="75"/>
-        <ellipse class="fp" cx="0" cy="0" rx="40" ry="67"/>
-        <ellipse class="fp" cx="0" cy="0" rx="35" ry="59"/>
-        <ellipse class="fp" cx="0" cy="0" rx="30" ry="51"/>
-        <ellipse class="fp" cx="0" cy="0" rx="25" ry="43"/>
-        <ellipse class="fp" cx="0" cy="0" rx="20" ry="35"/>
-        <ellipse class="fp" cx="0" cy="0" rx="15" ry="27"/>
-        <ellipse class="fp" cx="0" cy="0" rx="10" ry="19"/>
-        <ellipse class="fp" cx="0" cy="0" rx="6" ry="13"/>
-        <ellipse class="fp" cx="0" cy="0" rx="3" ry="8"/>
+    // Sound and vibration control
+    let soundEnabled = true;
+    let audioContext;
+    
+    // Initialize audio context on first user interaction
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    // Create professional scanner activation sound
+    function playActivationSound() {
+      if (!soundEnabled || !audioContext) return;
+      
+      // Deep, professional activation tone
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const filter = audioContext.createBiquadFilter();
+      
+      oscillator.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.3);
+      
+      filter.type = 'lowpass';
+      filter.frequency.value = 800;
+      
+      gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    }
+
+    // Create pure low-frequency machine hum - no melody
+    function createScanningDrone() {
+      if (!soundEnabled || !audioContext) return null;
+      
+      // Single low-frequency oscillator for pure machine hum
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const filter = audioContext.createBiquadFilter();
+      
+      oscillator.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Pure low-frequency machine vibration
+      oscillator.frequency.value = 78;
+      oscillator.type = 'sawtooth';
+      
+      // Heavy low-pass filter for deep machine sound
+      filter.type = 'lowpass';
+      filter.frequency.value = 160;
+      
+      gainNode.gain.setValueAtTime(0.06, audioContext.currentTime);
+      
+      oscillator.start(audioContext.currentTime);
+      
+      return { oscillator, gainNode };
+    }
+
+    // Subtle data processing clicks
+    function playDataClick() {
+      if (!soundEnabled || !audioContext) return;
+      
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const filter = audioContext.createBiquadFilter();
+      
+      oscillator.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Simple click sound
+      oscillator.frequency.value = 1100;
+      oscillator.type = 'sine';
+      
+      filter.type = 'bandpass';
+      filter.frequency.value = 1100;
+      filter.Q.value = 3;
+      
+      gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.06);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.06);
+    }
+
+    // Clear, pleasant crystal-like confirmation sound
+    function playSuccessSound() {
+      if (!soundEnabled || !audioContext) return;
+      
+      // Create a clear, pleasant bell-like confirmation
+      const osc1 = audioContext.createOscillator();
+      const osc2 = audioContext.createOscillator();
+      const osc3 = audioContext.createOscillator();
+      
+      const gain1 = audioContext.createGain();
+      const gain2 = audioContext.createGain();
+      const gain3 = audioContext.createGain();
+      
+      const masterGain = audioContext.createGain();
+      const filter = audioContext.createBiquadFilter();
+      
+      // Connect everything
+      osc1.connect(gain1);
+      osc2.connect(gain2);
+      osc3.connect(gain3);
+      
+      gain1.connect(filter);
+      gain2.connect(filter);
+      gain3.connect(filter);
+      
+      filter.connect(masterGain);
+      masterGain.connect(audioContext.destination);
+      
+      // Create a pleasant C major chord (C-E-G)
+      osc1.frequency.value = 523.25; // C5
+      osc2.frequency.value = 659.25; // E5
+      osc3.frequency.value = 783.99; // G5
+      
+      // Use sine waves for pure, pleasant tone
+      osc1.type = 'sine';
+      osc2.type = 'sine';
+      osc3.type = 'sine';
+      
+      // Gentle filter for smoothness
+      filter.type = 'lowpass';
+      filter.frequency.value = 2000;
+      
+      // Set gains for nice balance
+      gain1.gain.setValueAtTime(0.15, audioContext.currentTime);
+      gain2.gain.setValueAtTime(0.12, audioContext.currentTime);
+      gain3.gain.setValueAtTime(0.10, audioContext.currentTime);
+      
+      // Gentle fade out
+      gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+      gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+      gain3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+      
+      masterGain.gain.setValueAtTime(0.6, audioContext.currentTime);
+      
+      // Start all oscillators
+      osc1.start(audioContext.currentTime);
+      osc2.start(audioContext.currentTime);
+      osc3.start(audioContext.currentTime);
+      
+      // Stop all oscillators
+      osc1.stop(audioContext.currentTime + 0.8);
+      osc2.stop(audioContext.currentTime + 0.8);
+      osc3.stop(audioContext.currentTime + 0.8);
+    }
+
+    // Create system reset sound
+    function playResetSound() {
+      if (!soundEnabled || !audioContext) return;
+      
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
+      
+      oscillator.type = 'triangle';
+      
+      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.2);
+    }
+
+    // Vibration patterns
+    function vibrateDevice(pattern) {
+      if (navigator.vibrate) {
+        navigator.vibrate(pattern);
+      }
+    }
+
+    // Sound toggle functionality
+    soundToggle.addEventListener('click', function() {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        soundToggle.textContent = '🔊 SOUND';
+        soundToggle.classList.remove('muted');
+        initAudio();
+        playActivationSound(); // Test sound
+      } else {
+        soundToggle.textContent = '🔇 MUTED';
+        soundToggle.classList.add('muted');
+      }
+    });
+
+    // Clean uniform fingerprint pattern - only green colors
+    const cleanFingerprint = `<svg width="100%" height="100%" viewBox="0 0 170 270" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <style>
+          .fp{fill:none;stroke:#00e676;stroke-width:2.2;stroke-linecap:round;opacity:0.9;}
+        </style>
+      </defs>
+      <g transform="translate(85,135)">
+        <!-- Clean uniform fingerprint pattern -->
+        <ellipse class="fp" cx="0" cy="0" rx="75" ry="120"/>
+        <ellipse class="fp" cx="0" cy="0" rx="70" ry="112"/>
+        <ellipse class="fp" cx="0" cy="0" rx="65" ry="104"/>
+        <ellipse class="fp" cx="0" cy="0" rx="60" ry="96"/>
+        <ellipse class="fp" cx="0" cy="0" rx="55" ry="88"/>
+        <ellipse class="fp" cx="0" cy="0" rx="50" ry="80"/>
+        <ellipse class="fp" cx="0" cy="0" rx="45" ry="72"/>
+        <ellipse class="fp" cx="0" cy="0" rx="40" ry="64"/>
+        <ellipse class="fp" cx="0" cy="0" rx="35" ry="56"/>
+        <ellipse class="fp" cx="0" cy="0" rx="30" ry="48"/>
+        <ellipse class="fp" cx="0" cy="0" rx="25" ry="40"/>
+        <ellipse class="fp" cx="0" cy="0" rx="20" ry="32"/>
+        <ellipse class="fp" cx="0" cy="0" rx="15" ry="24"/>
+        <ellipse class="fp" cx="0" cy="0" rx="10" ry="16"/>
+        <ellipse class="fp" cx="0" cy="0" rx="6" ry="10"/>
+        <ellipse class="fp" cx="0" cy="0" rx="3" ry="6"/>
       </g>
     </svg>`;
 
     let timer;
     let isScanning = false;
     let isWelcomeShown = false;
+    let scanningDrone = null;
 
     function startScanning() {
       if (isScanning || isWelcomeShown) return;
       
+      // Initialize audio on first interaction
+      initAudio();
+      
       isScanning = true;
       statusText.textContent = 'SCANNING...';
       statusText.style.color = '#ff5722';
+      
+      // Professional activation sound
+      playActivationSound();
+      
+      // Start pure machine hum
+      scanningDrone = createScanningDrone();
+      
+      // Royal vibration pattern
+      vibrateDevice([120]);
       
       // Add scanning effects
       scanArea.classList.add('scanning');
@@ -460,7 +916,11 @@
       lights.forEach((light, index) => {
         setTimeout(() => {
           light.classList.add('active');
-        }, index * 300);
+          // Simple data processing clicks
+          playDataClick();
+          // Royal vibration
+          vibrateDevice([30]);
+        }, index * 350);
       });
 
       // Reset progress bar
@@ -471,20 +931,45 @@
         progressBar.style.width = '100%';
       }, 100);
 
+      // Occasional data processing clicks during scan
+      const dataInterval = setInterval(() => {
+        if (isScanning) {
+          playDataClick();
+        } else {
+          clearInterval(dataInterval);
+        }
+      }, 800); // Less frequent for cleaner sound
+
       // Complete scan after 3 seconds
       timer = setTimeout(() => {
+        clearInterval(dataInterval);
         completeScan();
       }, 3000);
     }
 
     function completeScan() {
-      // Use the clean oval fingerprint
-      fingerprintDisplay.innerHTML = standardFingerprint;
+      // Stop scanning drone gracefully
+      if (scanningDrone) {
+        scanningDrone.gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        scanningDrone.oscillator.stop(audioContext.currentTime + 0.3);
+        scanningDrone = null;
+      }
       
-      // Show success state - no "VERIFIED" message, just the identity verified message
-      statusText.style.display = 'none'; // Hide the status text completely
+      // Use the clean uniform fingerprint
+      fingerprintDisplay.innerHTML = cleanFingerprint;
+      
+      // Clear, pleasant success sound
+      setTimeout(() => {
+        playSuccessSound();
+      }, 200);
+      
+      // Royal success vibration pattern
+      vibrateDevice([200, 50, 200]);
+      
+      // Show success state
+      statusText.style.display = 'none';
       welcomeMessage.style.display = 'block';
-      countryWelcome.style.display = 'block';
+      royalWelcome.style.display = 'block';
       fingerprintDisplay.style.display = 'block';
       
       // Stop scanning effects
@@ -507,14 +992,18 @@
     function resetSystem() {
       isScanning = false;
       isWelcomeShown = false;
-      statusText.style.display = 'block'; // Show status text again
+      statusText.style.display = 'block';
       statusText.textContent = 'READY';
       statusText.style.color = '#00e676';
       welcomeMessage.style.display = 'none';
-      countryWelcome.style.display = 'none';
+      royalWelcome.style.display = 'none';
       fingerprintDisplay.style.display = 'none';
-      fingerprintDisplay.innerHTML = ''; // Clear the fingerprint
+      fingerprintDisplay.innerHTML = '';
       progressBar.style.width = '0';
+      
+      // Professional reset sound
+      playResetSound();
+      vibrateDevice([90]);
       
       // Re-enable scanner
       scanArea.classList.remove('disabled');
@@ -529,6 +1018,13 @@
 
     function cancelScanning() {
       if (!isScanning || isWelcomeShown) return;
+      
+      // Stop scanning drone
+      if (scanningDrone) {
+        scanningDrone.gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        scanningDrone.oscillator.stop(audioContext.currentTime + 0.1);
+        scanningDrone = null;
+      }
       
       clearTimeout(timer);
       isScanning = false;
@@ -562,7 +1058,7 @@
 
     // Enhanced event listeners with better touch handling
     scanArea.addEventListener('touchstart', function(e) {
-      e.preventDefault(); // Prevent default touch behavior
+      e.preventDefault();
       if (isWelcomeShown) {
         resetSystem();
       } else {
@@ -571,7 +1067,7 @@
     }, { passive: false });
 
     scanArea.addEventListener('mousedown', function(e) {
-      e.preventDefault(); // Prevent text selection
+      e.preventDefault();
       if (isWelcomeShown) {
         resetSystem();
       } else {
@@ -607,7 +1103,6 @@
     let longPressTimer;
     scanArea.addEventListener('touchstart', function(e) {
       longPressTimer = setTimeout(function() {
-        // Clear any selection that might have occurred
         if (window.getSelection) {
           window.getSelection().removeAllRanges();
         }
