@@ -328,12 +328,12 @@
       text-shadow: none;
     }
 
-    /* Progress bar positioned properly below the instruction text */
+    /* Progress bar moved down 20px from previous position */
     #progress-container {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, 120px);
+      transform: translate(-50%, 140px);
       width: min(280px, 72vw);
       height: 8px;
       background: rgba(0, 230, 118, 0.2);
@@ -347,7 +347,7 @@
 
     @media (max-width: 1200px) {
       #progress-container {
-        transform: translate(-50%, 110px);
+        transform: translate(-50%, 130px);
         width: min(240px, 75vw);
         height: 7px;
       }
@@ -355,7 +355,7 @@
 
     @media (max-width: 768px) {
       #progress-container {
-        transform: translate(-50%, 100px);
+        transform: translate(-50%, 120px);
         width: min(220px, 80vw);
         height: 6px;
       }
@@ -573,7 +573,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, 160px);
+      transform: translate(-50%, 180px);
       font-size: clamp(9px, 1.3vw, 11px);
       color: #6b7280;
       text-align: center;
@@ -584,21 +584,21 @@
 
     @media (max-width: 1200px) {
       .reset-instruction {
-        transform: translate(-50%, 145px);
+        transform: translate(-50%, 165px);
       }
     }
 
     @media (max-width: 768px) {
       .reset-instruction {
-        transform: translate(-50%, 135px);
+        transform: translate(-50%, 155px);
       }
     }
 
-    /* Sound control button MOVED WAY UP to be visible */
+    /* Sound control button moved to very top - same line as biometric terminal */
     .sound-toggle {
       position: absolute;
-      top: 60px;
-      right: 18px;
+      top: 18px;
+      right: 120px;
       background: linear-gradient(135deg, 
         rgba(0, 230, 118, 0.15), 
         rgba(13, 71, 161, 0.1));
@@ -617,13 +617,13 @@
 
     @media (max-width: 1200px) {
       .sound-toggle {
-        top: 55px;
+        right: 110px;
       }
     }
 
     @media (max-width: 768px) {
       .sound-toggle {
-        top: 50px;
+        right: 100px;
       }
     }
 
